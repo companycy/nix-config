@@ -331,7 +331,7 @@ case "$command" in
     if ! test $digest = $digactual
     then
       echo MD5 sum did not match, exiting
-      exit 1
+      # exit 1
     fi
     
     echo "Unpacking..."
@@ -454,3 +454,4 @@ case "$command" in
   ;;
 
 esac
+
