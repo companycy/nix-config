@@ -1,0 +1,156 @@
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
+
+(desktop-save-mode t)
+
+
+(ansi-color-for-comint-mode-on)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;; (setq comment-multi-line t)  ;;
+(which-func-mode t)          ;;
+;; (setq-default c-basic-offset 4) 
+;; (add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    ;; (c-set-style "K&R")
+	    ;; (setq tab-width 4 indent-tabs-mode nil)
+	    (setq comment-start "// " ;; Preferred comment style
+		  comment-end "")
+	    )
+	  )
+
+
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+		((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+		(t (self-insert-command (or arg 1)))))
+
+
+(global-set-key "\M-/" 'hippie-expand)
+(global-set-key "\M-o" 'other-window)
+(global-set-key "\M-g" 'goto-line)
+(global-set-key "\M-y" 'browse-kill-ring)
+
+(global-set-key "\M-0" 'kill-this-buffer)
+(global-set-key "\M-1" 'ido-switch-buffer-other-window)
+(global-set-key "\M-2" 'delete-other-windows)
+(global-set-key "\M-3" 'rgrep)
+(global-set-key "\M-4" 'find-name-dired)
+(global-set-key "\M-5" 'ff-find-related-file)
+
+(global-set-key "\M-6" 'highlight-symbol-at-point)
+
+(global-set-key "\M-7" 'goto-last-change)
+
+(global-set-key "\M-8" 'grep-buffers)
+
+(global-set-key "\M-9" 'set-mark-command)
+
+
+(global-set-key "\C-z" 'undo)
+
+
+(setq frame-title-format "%b")          ;%b@emacs
+(setq inhibit-startup-message t)
+
+(fset 'yes-or-no-p 'y-or-n-p);
+
+(column-number-mode 1)
+(display-time-mode 1)
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+
+(setq suggest-key-bindings 1)
+(setq-default kill-whole-line t) ;
+(setq default-major-mode 'text-mode) ;
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+(setq kill-ring-max 200)
+
+(setq require-final-newline t) ;
+
+(global-font-lock-mode t) ;;
+
+(transient-mark-mode t) ;;
+
+(setq scroll-margin 5 ;;
+      scroll-conservatively 10000)
+
+(show-paren-mode t)
+(setq show-paren-style 'parentheses)
+
+(mouse-avoidance-mode 'animate) ;
+
+(setq isearch-allow-scroll t)
+
+(setq search-highlight t)
+(setq grep-highlight-matches t)
+(setq query-replace-highlight t)
+
+
+(require 'grep-buffers)
+(require 'goto-last-change)
+(require 'auto-complete-config)
+(ac-config-default)
+
+(require 'go-mode)
+(require 'go-autocomplete)
+
+(ido-mode t)
+(setq ido-enable-tramp-completion t)
+(setq ido-save-directory-list-file nil)
+
+(require 'highlight-symbol)
+(require 'browse-kill-ring)
+(require 'cmake-mode)
+
+(require 'color-theme)
+;; (load-file "~/.emacs.d/color-theme-si.el")
+;; (color-theme-si)
+
+(setq uniquify-buffer-name-style 'forward)
+(setq dired-recursive-copies 'top)
+(setq dired-recursive-deletes 'top)
+
+(setq read-file-name-completion-ignore-case t)
+;; (setq auto-save-default nil)
+(setq enable-recursive-minibuffers t)
+(setq yank-pop-change-selection t)
+(setq tramp-unified-filenames t)
+(setq-default auto-fill-function 'do-auto-fill)  ; Autofill in all modes
+
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(menu-bar-mode nil)
+ '(search-upper-case nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
