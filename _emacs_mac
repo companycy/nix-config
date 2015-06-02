@@ -1,0 +1,250 @@
+;; m-x untabify
+;; m-x whitespace-cleanup
+
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+;; So the idea is that you copy/paste this code into your *scratch* buffer,
+;; hit C-j, and you have a working el-get.
+(url-retrieve
+ "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+ (lambda (s)
+   (goto-char (point-max))
+   (eval-print-last-sexp)))
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
+(require 'php-mode)
+
+(require 'maxframe)
+(add-hook 'window-setup-hook 'maximize-frame t)
+
+;; (require 'csharp-mode)
+;; (setq auto-mode-alist
+;;       (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
+
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+(unless (package-installed-p 'sbt-mode)
+  (package-refresh-contents) (package-install 'sbt-mode))
+
+;; (require 'helm-config)
+;; (helm-mode 1)
+
+(projectile-global-mode)
+(setq projectile-enable-caching t)
+
+(require 'grep-buffers)
+
+(require 'goto-last-change)
+
+;; auto complete
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(require 'auto-complete-config)
+(ac-config-default)
+
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-tramp-completion t)
+(setq ido-save-directory-list-file nil)
+
+(require 'highlight-symbol)
+;; (global-set-key "\M-6" 'highlight-symbol-at-point)
+(global-set-key [f3] 'highlight-symbol-next)
+(global-set-key [(shift f3)] 'highlight-symbol-prev)
+
+(setq-default make-backup-files nil) ;;
+
+(require 'browse-kill-ring)
+(global-set-key (kbd "M-y") 'browse-kill-ring)
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+;; ===============================
+(desktop-save-mode t)
+
+;; (set-default-font "-outline-Monaco-normal-normal-normal-mono-13-*-*-*-c-*-iso8859-1")
+
+(ansi-color-for-comint-mode-on)
+
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+
+
+(global-auto-revert-mode t)
+;;==================================
+;; C
+;;==================================
+(setq comment-multi-line t)  ;;
+(which-func-mode t)          ;;
+
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    ;; Preferred comment style
+	    (setq comment-start "// "
+		  comment-end "")))
+
+
+;; hotkey
+;; ===============================
+(global-set-key "\M-/" 'hippie-expand)
+(global-set-key "\M-o" 'other-window)
+(global-set-key "\M-g" 'goto-line)
+
+(global-set-key "\M-0" 'kill-this-buffer)
+(global-set-key "\M-1" 'ido-switch-buffer-other-window)
+(global-set-key "\M-2" 'delete-other-windows)
+(global-set-key "\M-3" 'rgrep)
+(global-set-key "\M-4" 'find-name-dired)
+(global-set-key "\M-5" 'ff-find-related-file)
+
+(global-set-key "\M-6" 'highlight-symbol-at-point)
+
+(global-set-key "\M-7" 'goto-last-change)
+
+(global-set-key "\M-8" 'grep-buffers)
+
+(global-set-key "\M-9" 'set-mark-command)
+
+
+(global-set-key "\C-z" 'undo)
+
+
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+		((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+		(t (self-insert-command (or arg 1)))))
+
+;(define-key ibuffer-mode-map "r" 'ywb-ibuffer-rename-buffer)
+  (defun ywb-ibuffer-rename-buffer ()
+    (interactive)
+    (call-interactively 'ibuffer-update)
+    (let* ((buf (ibuffer-current-buffer))
+	   (name (generate-new-buffer-name
+		  (read-from-minibuffer "Rename buffer(to new name): "
+					(buffer-name buf)))))
+      (with-current-buffer buf
+	(rename-buffer name)))
+    (call-interactively 'ibuffer-update))
+
+
+(setq frame-title-format "%b")          ;%b@emacs
+(setq inhibit-startup-message t)
+
+(auto-image-file-mode t);
+(fset 'yes-or-no-p 'y-or-n-p);
+
+(display-time-mode 1)
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+
+(setq suggest-key-bindings 1)
+
+;;(setq track-eol t)  ;;
+
+(setq-default kill-whole-line t) ;
+
+;(setq default-line-spacing 0)
+
+;(setq default-fill-column 80)
+
+(setq default-major-mode 'text-mode) ;
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+(setq kill-ring-max 200)
+
+(setq require-final-newline t) ;
+
+(global-font-lock-mode t) ;;
+
+(transient-mark-mode t) ;;
+
+(setq scroll-margin 5 ;;
+      scroll-conservatively 10000)
+
+(show-paren-mode t)
+(setq show-paren-style 'parentheses)
+
+(mouse-avoidance-mode 'animate) ;
+
+(setq isearch-allow-scroll t)
+
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "http://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+
+
+
+(setq search-highlight t)
+(setq grep-highlight-matches t)
+(setq query-replace-highlight t)
+
+
+
+(load-file "~/.emacs.d/google-c-style.el")
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c++-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+;; (defun cpplint ()
+;;   "check source code format according to Google Style Guide"
+;;   (interactive)
+;;   (compilation-start (concat "python ~/Documents/emacs-lisp/cpplint.py " (buffer-file-name))))
+
+
+(autoload 'geben "geben" "DBGp protocol frontend, a script debugger" t)
+
+;; Debug a simple PHP script.
+;; Change the session key my-php-54 to any session key text you like
+(defun my-php-debug ()
+  "Run current PHP script for debugging with geben"
+  (interactive)
+  (call-interactively 'geben)
+  (shell-command
+    (concat "XDEBUG_CONFIG='idekey=my-php-54' /usr/bin/php "
+    (buffer-file-name) " &"))
+  )
+
+(setq dired-recursive-copies 'top)
+(setq dired-recursive-deletes 'top)
+(setq read-file-name-completion-ignore-case t)
+(setq auto-save-default nil)
+(setq enable-recursive-minibuffers t)
+(setq yank-pop-change-selection t)
+(setq tramp-unified-filenames t)
+(setq-default auto-fill-function 'do-auto-fill)  ; Autofill in all modes
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(menu-bar-mode nil)
+ '(safe-local-variable-values (quote ((require-final-newline . t))))
+ '(scroll-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(undo-outer-limit 1200000000))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
