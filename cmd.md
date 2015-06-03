@@ -1516,3 +1516,18 @@ svn chenying:123456
 
 .inputrc:
 set completion-ignore-case on
+
+
+$ sudo yum clean all 
+$ sudo yum --disablerepo="epel" update nss
+
+ 17 wget http://mirrors.ustc.edu.cn/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+ 18 rpm -ivh epel-release-6-8.noarch.rpm
+ 19 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+ 20 yum makecache
+
+ $ cd /etc/yum.repos.d
+ $ sudo wget http://pj.freefaculty.org/EL/pjku.repo
+ $ sudo rpm --import http://pj.freefaculty.org/EL/PaulJohnson-BinaryPackageSigningKey
+ $ sudo yum install emacs-24.2-4.el6.x86_64
+ $ emacs -version
