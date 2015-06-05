@@ -1531,3 +1531,10 @@ $ sudo yum --disablerepo="epel" update nss
  $ sudo rpm --import http://pj.freefaculty.org/EL/PaulJohnson-BinaryPackageSigningKey
  $ sudo yum install emacs-24.2-4.el6.x86_64
  $ emacs -version
+
+
+
+yum info boost
+-lboost_thread-mt
+
+
