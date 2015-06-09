@@ -998,7 +998,7 @@ pip install cython
 
 yum install python-devel
 
-
+apt-get install python-dev
 
 [root@game-server-95 api.mars.app_store_15.xixun.com]# pear install channel://pear.php.net/Console_ProgressBar-0.5.2beta
 downloading Console_ProgressBar-0.5.2beta.tgz ...
