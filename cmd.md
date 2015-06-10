@@ -1545,3 +1545,6 @@ yum info boost
 -lboost_thread-mt
 
 
+
+
+vagrant box add precise64 https://vagrantcloud.com/hashicorp/boxes/precise64/versions/1.1.0/providers/virtualbox.box
