@@ -12,7 +12,7 @@ cat .ssh/id_rsa.pub
 
 # for other packages
 sudo apt-get install -y emacs24 xfce4 git openssh-server subversion vagrant golang virtualbox python-setuptools vim  openjdk-7-jdk skype fcitx-table-wubi 
-easy_install pip
+easy_install pip scala docker
 sudo easy_install pip
 
 # to enable zowie kbd for ubuntu
@@ -30,3 +30,21 @@ sudo reboot
 # for golang
 export GOROOT=/usr/lib/go
 export GOPATH=$HOME/go
+
+# for salt
+sudo add-apt-repository ppa:saltstack/salt
+sudo apt-get update
+sudo apt-get install -y salt-master salt-minion
+
+# 
+sudo rm /var/lib/apt/lists/lock
+
+# linux_signing_key.pub to install chrome for ubuntu
+sudo apt-key add linux_signing_key.pub
+sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+sudo apt-get update
+sudo apt-get install google-chrome-stable
+
+
+
+
