@@ -1,0 +1,2 @@
+ediff-directories
+=h x

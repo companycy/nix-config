@@ -12,7 +12,7 @@ cat .ssh/id_rsa.pub
 
 # for other packages
 sudo apt-get install -y emacs24 xfce4 git openssh-server subversion vagrant golang virtualbox python-setuptools vim  openjdk-7-jdk skype fcitx-table-wubi 
-easy_install pip scala docker
+easy_install pip scala docker swig dpkg-dev python-dev pypy-dev python-setuptools
 sudo easy_install pip
 
 # to enable zowie kbd for ubuntu
@@ -46,5 +46,19 @@ sudo apt-get update
 sudo apt-get install google-chrome-stable
 
 
+# apt-get install -y dpkg-dev
+sudo apt-get install libdpkg-perl=1.17.5ubuntu5
 
+# ubuntu 14 can't halt
+sudo apt-get remove --purge bcmwl-kernel-source
+sudo apt-get install linux-firmware-nonfree
 
+# python uninstall package
+sudo python setup.py install --record installed.txt
+cat installed.txt | xargs sudo rm -rf
+
+# from 163
+sudo cp ~/Documents/bin/sources.list.trusty /etc/apt/sources.list
+
+# clone branch 
+git clone  -b  v0.10.0 --depth 1  https://github.com/saltstack/salt salt-0.10.0

@@ -556,6 +556,8 @@ git remote show android
 
 git clone git@git.dev.xixun.com:mars_api_project.git
 
+git clone -b 13.1rc1-Gotham --depth 1  https://github.com/xbmc/xbmc.git
+
 For a specific file use:
 git checkout path/to/file/to/revert
 
@@ -1548,3 +1550,5 @@ yum info boost
 
 
 vagrant box add precise64 https://vagrantcloud.com/hashicorp/boxes/precise64/versions/1.1.0/providers/virtualbox.box
+
+
