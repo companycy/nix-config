@@ -1,0 +1,48 @@
+# file: _codeComplete
+# hi parameter-completion
+
+_codeComplete() #  By convention, the function name starts with an underscore
+{
+    # Pointer to current completion word.
+    # By convention, it's named "cur" but this isn't strictly necessary.
+
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    case "$cur" in
+        -*)
+        COMPREPLY=( $( compgen -W '-a -d -f -l -t -h --aoption --debug \
+                                 --file --log --test --help --' -- $cur ) );;
+        #   Generate the completion matches and load them into $COMPREPLY array.
+        #   xx) May add more cases here.
+        #   yy)
+        #   zz)
+
+        *)
+        COMPREPLY=( $(compgen -W "$(ls /pitrix/conf/settings/)" -- $cur) );;
+    esac
+}
+
+complete -F _codeComplete ./hi
+
+# only _codeComplete can work well
+# root@testing-firstbox:~# source _codeComplete 
+# root@testing-firstbox:~# ./hi 
+# dns-master   jenkins0     pgpool0      pgserver1    t-hyper1     t-hyper3     t-ks0        t-ks2        webservice0  zoocassa1    
+# dns-slave    jenkins1     pgserver0    proxy0       t-hyper2     t-hyper4     t-ks1        vbr1         zoocassa0    zoocassa2    
+# root@testing-firstbox:~# ./hi -
+# --         -a         --aoption  -d         --debug    -f         --file     -h         --help     -l         --log      -t         --test     
+# root@testing-firstbox:~# ./hi --
+# --         --aoption  --debug    --file     --help     --log      --test     
+
+# now add hi
+# root@testing-firstbox:~# more hi
+# #!/bin/bash
+# 
+# SCRIPT=`readlink -f $0`
+# CWD=`dirname $SCRIPT`
+# 
+# echo "arguments: $1"
+
+# it's what we need
+# root@testing-firstbox:~# ./hi pgpool0 
+# arguments: pgpool0
+
