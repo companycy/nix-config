@@ -1,0 +1,26 @@
+--- /usr/share/terminator/terminatorlib/terminal.py	2015-09-17 11:59:59.670236940 +0800
++++ /usr/share/terminator/terminatorlib/terminal.py.bak	2015-10-07 16:09:06.952235919 +0800
+@@ -863,17 +863,15 @@
+                 url = self.check_for_url(event)
+                 if url:
+                     self.open_url(url, prepare=True)
+-        # changed by bjcheny
+-        # elif event.button == 2:
+-        elif event.button == 3:
++        elif event.button == 2:
+             # middleclick should paste the clipboard
+             self.paste_clipboard(True)
+             return(True)
+-        # elif event.button == 3:
+-        #     # rightclick should display a context menu if Ctrl is not pressed
+-        #     if event.state & gtk.gdk.CONTROL_MASK == 0:
+-        #         self.popup_menu(widget, event)
+-        #         return(True)
++        elif event.button == 3:
++            # rightclick should display a context menu if Ctrl is not pressed
++            if event.state & gtk.gdk.CONTROL_MASK == 0:
++                self.popup_menu(widget, event)
++                return(True)
+ 
+         return(False)
+     
