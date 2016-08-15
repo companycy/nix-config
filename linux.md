@@ -11,8 +11,8 @@ ssh-add ~/.ssh/id_rsa
 cat .ssh/id_rsa.pub 
 
 # for other packages
-sudo apt-get install -y emacs24 xfce4 git openssh-server subversion vagrant golang virtualbox python-setuptools vim  openjdk-7-jdk skype fcitx-table-wubi 
-easy_install pip scala docker swig dpkg-dev python-dev pypy-dev python-setuptools
+sudo apt-get install -y emacs24 xfce4 git openssh-server subversion vagrant golang virtualbox python-setuptools vim  openjdk-7-jdk skype fcitx-table-wubi qemu-kvm qemu libvirt-bin libvirt-dev bridge-utils uml-utilities docker scala swig dpkg-dev python-dev pypy-dev  openvpn vnc4server tree dos2unix xdg-open
+easy_install pip
 sudo easy_install pip
 
 # to enable zowie kbd for ubuntu
@@ -62,3 +62,15 @@ sudo cp ~/Documents/bin/sources.list.trusty /etc/apt/sources.list
 
 # clone branch 
 git clone  -b  v0.10.0 --depth 1  https://github.com/saltstack/salt salt-0.10.0
+
+
+# fix missing system-setting
+apt-get install -y ubuntu-desktop
+unity-control-center
+
+# run system-config-kickstart
+apt-get remove hwdata
+wget ftp://mirror.ovh.net/mirrors/ftp.debian.org/debian/pool/main/h/hwdata/hwdata_0.234-1_all.deb
+dpkg -i hwdata_0.234-1_all.deb
+apt-mark hold hwdata
+apt-get install system-config-kickstart

@@ -151,6 +151,8 @@ Preferences -> Settings -> Keyboard and turn on "Use option as meta key"
 rsync -avz ~/Documents/emacs-lisp root@192.168.101.1:~/
 rsync -avz ~/.emacs.d root@192.168.101.1:~/.emacs.d/
 
+rsync -avz -e "ssh -p $portNumber"
+
 rsync --partial <!--  -->
 
 --delete-source-files
@@ -192,7 +194,15 @@ thrift -r --gen java  ServiceTest.thrift
 
 node-gyp configure build
 
+svn revert:
+$ git reset foo/bar.txt
+$ git checkout foo/bar.txt
+
+
 git reset --hard FETCH_HEAD
+
+git reset --soft HEAD~1  xx.py
+
 
 git reset HEAD srcfile
 
@@ -986,6 +996,7 @@ yum install -y MySQL-python
 
 sudo easy_install redis
 
+pip search yaml
 
 find . -type f -size +500M -exec ls -lh {} \;
 
@@ -1097,6 +1108,10 @@ CREATE USER bjcheny WITH PASSWORD 'passw0rd';
 GRANT ALL PRIVILEGES ON DATABASE test to bjcheny;
 su - bjcheny
 psql -d test -U bjcheny
+
+CREATE USER yunify WITH PASSWORD 'zhu88jie';
+
+CREATE USER heartbeat WITH PASSWORD 'heartbeat';
 
 pg_dump -t my_user |psql test
 alter table my_user owner to bjcheny;
@@ -1551,4 +1566,94 @@ yum info boost
 
 vagrant box add precise64 https://vagrantcloud.com/hashicorp/boxes/precise64/versions/1.1.0/providers/virtualbox.box
 
+
+
+
+sslocal -s 104.224.160.144 -p 1080 -b 127.0.0.1 -l 1080 -k houshadowsocks -t 600 -m rc4
+
+
+
+bash -x script 
+
+
+Personnaly, I use the following workflow:
+
+run on a C-c C-c m to run Mark­down on the cur­rent buffer and pre­view the out­put in an­other buffer.
+move to html-mode on this other buffer (M-x html-mode)
+hide the html tags to display something close to the output (M-x sgml-tags-invisible)
+Then every time you want to refresh the rendering, simply run again C-c C-c m on the markdown buffer.
+
+
+
+sudo openvpn /etc/openvpn/office-yunify.conf
+
+
+
+
+xrandr --auto --output VGA-1 --mode 1440x900 --right-of LVDS-1
+
+
+
+xrandr --newmode "1024x768" 63.50  1024 1072 1176 1328  768 771 775 798 -hsync +vsync
+xrandr --addmode VGA1 1024x768
+xrandr --fb 1024x768
+xrandr --fb 1024x768 --output LVDS1 --mode 1024x600 --scale 1x1.28 --panning 0x0
+xrandr --output VGA1 --same-as LVDS1 --mode 1024x768
+
+vi /usr/share/terminator/terminatorlib/terminal.py
+
+
+
+
+http://www.cyberciti.biz/tips/linux-unix-get-yesterdays-tomorrows-date.html
+
+sudo date --set="-1 days"
+
+
+
+sudo poff vpn
+
+sudo pon vpn persist
+
+
+
+git checkout feature1
+git merge master
+
+
+smb://192.168.31.1/
+
+
+~/.config/tint2/tint2rc
+# Panel
+panel_items = LTSBC
+L
+Show Launcher
+T
+Show Taskbar
+S
+Show Systray
+B
+Show Battery status
+C
+Show Clock
+
+
+
+grep -L => -v file
+grep -l => file
+
+
+grep -C
+-A after
+-B before
+
+-c count
+
+-o
+
+
+compile py to pyc:
+python
+>>> import test
 

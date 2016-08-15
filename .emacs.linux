@@ -21,7 +21,7 @@
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
-;; (require 'php-mode)
+(require 'php-mode)
 
 (require 'maxframe)
 (add-hook 'window-setup-hook 'maximize-frame t)
@@ -69,6 +69,19 @@
 
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
+
+;; (require 'ztree-diff)
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
+
+;; (define-derived-mode saltstack-mode yaml-mode "Saltstack"
+;;   "Minimal Saltstack mode, based on `yaml-mode'."
+;;   (setq tab-width 2
+;;         indent-tabs-mode nil))
+;; (add-to-list 'auto-mode-alist '("\\.sls\\'" . saltstack-mode))
+
+(require 'jinja2-mode)
 
 ;; ===============================
 (desktop-save-mode t)
@@ -143,6 +156,7 @@
 
 
 (setq frame-title-format "%b")          ;%b@emacs
+(set-frame-parameter (selected-frame) 'alpha '(85 85))
 (setq inhibit-startup-message t)
 
 (auto-image-file-mode t);
@@ -237,6 +251,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
+ '(fill-column 300)
  '(menu-bar-mode nil)
  '(safe-local-variable-values (quote ((require-final-newline . t))))
  '(scroll-bar-mode nil)
